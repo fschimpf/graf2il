@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GCDocument color="-1" dimTicks="25" dpwsInterface="" dpwsPort="-1" height="643" horizontalScrollBar="1" modifiable="1" name="J1" saveVersion="8" scale="1.23" simulationMode="1" socketHost="" socketIsServer="0" socketPort="-1" socketSendMode="Changed" threadSpeed="40" tokenLuminance="0" verticalScrollBar="1" viewPositionX="0" viewPositionY="0" width="618" x="0" y="0">
+  <DigitalIn channel="I0.0" cyclic="1" height="60" name="Start" value="0" width="80" x="50" y="60"/>
+  <DigitalIn channel="I0.1" cyclic="1" height="60" name="Stop" value="0" width="80" x="50" y="180"/>
+  <DigitalOut channel="Q0.0" height="60" name="Lampe" value="0" width="80" x="60" y="310"/>
+  <GCInitialStep actionBlockVisible="1" actionText="S Lampe = 0;" fileName="" height="70" id="c4df7523-5f84-4ad6-88eb-b6335aa627c3" name="Aus" useIcon="0" width="200" x="260" y="65"/>
+  <GCStep actionBlockVisible="1" actionText="S Lampe = 1;" fileName="" height="70" id="25c5f6b5-543e-416f-bea8-b97a08262d22" name="Ein" useIcon="0" width="200" x="260" y="235"/>
+  <GCTransition actionText="Start" conditionVisible="1" height="25" id="713b8790-534d-49ea-97bc-303bbe6027d3" width="30" x="275" y="170"/>
+  <GCTransition actionText="Stop" conditionVisible="1" height="25" id="12927d86-ad5c-46e1-aa69-882964ec2a95" width="30" x="275" y="340"/>
+  <GCLink fromObject="c4df7523-5f84-4ad6-88eb-b6335aa627c3" manAdj="0" toObject="713b8790-534d-49ea-97bc-303bbe6027d3">
+    <Stroke x="290" y="136"/>
+    <Stroke x="290" y="146"/>
+    <Stroke x="290" y="152"/>
+    <Stroke x="290" y="152"/>
+    <Stroke x="290" y="159"/>
+    <Stroke x="290" y="169"/>
+  </GCLink>
+  <GCLink fromObject="713b8790-534d-49ea-97bc-303bbe6027d3" manAdj="0" toObject="25c5f6b5-543e-416f-bea8-b97a08262d22">
+    <Stroke x="290" y="196"/>
+    <Stroke x="290" y="206"/>
+    <Stroke x="290" y="215"/>
+    <Stroke x="290" y="215"/>
+    <Stroke x="290" y="224"/>
+    <Stroke x="290" y="234"/>
+  </GCLink>
+  <GCLink fromObject="25c5f6b5-543e-416f-bea8-b97a08262d22" manAdj="0" toObject="12927d86-ad5c-46e1-aa69-882964ec2a95">
+    <Stroke x="290" y="306"/>
+    <Stroke x="290" y="316"/>
+    <Stroke x="290" y="322"/>
+    <Stroke x="290" y="322"/>
+    <Stroke x="290" y="329"/>
+    <Stroke x="290" y="339"/>
+  </GCLink>
+  <GCLink fromObject="12927d86-ad5c-46e1-aa69-882964ec2a95" manAdj="1" toObject="c4df7523-5f84-4ad6-88eb-b6335aa627c3">
+    <Stroke x="290" y="366"/>
+    <Stroke x="290" y="376"/>
+    <Stroke x="201" y="376"/>
+    <Stroke x="201" y="54"/>
+    <Stroke x="290" y="54"/>
+    <Stroke x="290" y="64"/>
+  </GCLink>
+</GCDocument>
