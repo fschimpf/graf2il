@@ -35,6 +35,16 @@ for dout in root.findall('DigitalOut'):
     digOutDict[name] = channel
 print digOutDict
 print
+
+MDict = {}                               # create Dictonary for PLC-Memory-Bits
+nextM = 0                                # counter for next unused Memory-Bit
+
+def mem(n):
+    "Generate memory-bit-notation (e.g. M0.0) from number of memory-bit (Mx.y)"
+    mBit = (n / 8, n % 8)
+    memstring = 'M{0[0]}.{0[1]}'.format(mBit)
+    return memstring
+
 print 'found initial step:'
 for initialStep in root.findall('GCInitialStep'):
     name = initialStep.get('name')
