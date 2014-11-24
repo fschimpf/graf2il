@@ -1,0 +1,44 @@
+ORGANIZATION_BLOCK MAIN:OB1
+TITLE=PROGRAM COMMENTS
+BEGIN
+Network 1 
+LD     M0.0
+A      I0.0
+=      M5.0
+Network 2 
+LD     M0.1
+A      I0.1
+=      M5.1
+Network 3 
+// Initial condition
+LDN    M0.1
+=      M0.0
+Network 4 
+LD     M5.0
+O      M0.1
+AN     M5.1
+=      M0.1
+Network 5 
+LD     M5.1
+O      M0.0
+AN     M5.0
+=      M0.0
+Network 6 
+LD     M0.0
+R      Q0.0, 1
+Network 7 
+LD     M0.1
+S      Q0.0, 1
+END_ORGANIZATION_BLOCK
+SUBROUTINE_BLOCK SBR_0:SBR0
+TITLE=SUBROUTINE COMMENTS
+BEGIN
+Network 1 // Network Title
+// Network Comment
+END_SUBROUTINE_BLOCK
+INTERRUPT_BLOCK INT_0:INT0
+TITLE=INTERRUPT ROUTINE COMMENTS
+BEGIN
+Network 1 // Network Title
+// Network Comment
+END_INTERRUPT_BLOCK
