@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<GCDocument color="-1" dimTicks="25" dpwsInterface="" dpwsPort="-1" height="841" horizontalScrollBar="1" modifiable="1" name="J1" saveVersion="8" scale="0.81" simulationMode="1" socketHost="" socketIsServer="0" socketPort="-1" socketSendMode="Changed" threadSpeed="40" tokenLuminance="0" verticalScrollBar="1" viewPositionX="0" viewPositionY="0" width="879" x="0" y="0">
+<GCDocument color="-1" dimTicks="25" dpwsInterface="" dpwsPort="-1" height="658" horizontalScrollBar="1" modifiable="1" name="J1" saveVersion="8" scale="0.81" simulationMode="1" socketHost="" socketIsServer="0" socketPort="-1" socketSendMode="Changed" threadSpeed="40" tokenLuminance="0" verticalScrollBar="1" viewPositionX="0" viewPositionY="210" width="1156" x="0" y="0">
   <DigitalIn channel="I1.1" cyclic="1" height="60" name="Start" value="1" width="80" x="50" y="70"/>
   <DigitalIn channel="I1.0" cyclic="1" height="60" name="Stopp" value="1" width="80" x="50" y="170"/>
   <DigitalIn channel="I0.0" cyclic="1" height="60" name="S_tallerken" value="0" width="80" x="50" y="270"/>
@@ -12,20 +12,20 @@
   <DigitalOut channel="Q0.0" height="60" name="Sylinder_laas_ut" value="0" width="80" x="180" y="270"/>
   <DigitalOut channel="Q0.3" height="60" name="Sylinder_bor_ned" value="0" width="80" x="180" y="370"/>
   <DigitalOut channel="Q0.2" height="60" name="Sylinder_bor_opp" value="0" width="80" x="180" y="470"/>
-  <GCInitialStep actionBlockVisible="1" actionText="S motor_tallerken = 0;" fileName="" height="70" id="62d7f854-94c6-4c76-911b-03d48953e9d4" name="Vent på start" useIcon="0" width="200" x="470" y="85"/>
+  <GCInitialStep actionBlockVisible="1" actionText="S motor_tallerken = 0;" fileName="" height="70" id="62d7f854-94c6-4c76-911b-03d48953e9d4" name="Vent paa start" useIcon="0" width="200" x="470" y="85"/>
   <GCStep actionBlockVisible="1" actionText="S motor_tallerken = 1;" fileName="" height="70" id="84525264-fd91-4d40-8482-c3b8a19e3a39" name="roter tallerken" useIcon="0" width="200" x="470" y="205"/>
   <GCTransition actionText="Start" conditionVisible="1" height="25" id="50438ab6-9fc6-49ba-9d3b-015d95318e5d" width="30" x="485" y="160"/>
   <GCTransition actionText="S_tallerken" conditionVisible="1" height="25" id="101b9e26-bea2-4ef2-85ba-612552e2cedf" width="30" x="485" y="290"/>
-  <GCStep actionBlockVisible="1" actionText="S motor_tallerken = 0;&#10;S Sylinder_laas_ut = 1;" fileName="" height="70" id="88588d2f-a53e-4de6-8fe5-c3fd25617f42" name="lås kloss" useIcon="0" width="200" x="470" y="335"/>
+  <GCStep actionBlockVisible="1" actionText="S motor_tallerken = 0;&#10;S Sylinder_laas_ut = 1;" fileName="" height="70" id="88588d2f-a53e-4de6-8fe5-c3fd25617f42" name="laas kloss" useIcon="0" width="200" x="470" y="335"/>
   <GCTransition actionText="S_laas_ut" conditionVisible="1" height="25" id="3bc5bd62-c967-451a-bc94-0c7628395c65" width="30" x="485" y="420"/>
   <GCStep actionBlockVisible="1" actionText="S motor_boremaskin = 1;&#10;S Sylinder_bor_ned = 1;" fileName="" height="70" id="2e4bec9e-0aeb-4637-8c33-0078b7c27162" name="bore" useIcon="0" width="200" x="470" y="465"/>
   <GCTransition actionText="S_boring_ferdig" conditionVisible="1" height="25" id="9f9923e2-309c-4744-ad7a-6169ec1269e5" width="30" x="485" y="550"/>
   <GCStep actionBlockVisible="1" actionText="S Sylinder_bor_ned = 0;&#10;S Sylinder_bor_opp = 1;" fileName="" height="70" id="dfe6a2ef-1dea-4650-bb9c-d466f7b18de1" name="hev boremaskin" useIcon="0" width="200" x="470" y="585"/>
   <GCTransition actionText="S_bor_opp" conditionVisible="1" height="25" id="dc917e44-6fa2-4697-9227-253f4c9f072d" width="30" x="485" y="670"/>
-  <GCStep actionBlockVisible="1" actionText="S motor_boremaskin = 0;&#10;S Sylinder_laas_ut = 0;&#10;S Sylinder_bor_opp = 0;" fileName="" height="70" id="d4568783-1da4-4ab5-9fef-b86a77068a52" name="åpne lås" useIcon="0" width="200" x="470" y="705"/>
+  <GCStep actionBlockVisible="1" actionText="S motor_boremaskin = 0;&#10;S Sylinder_laas_ut = 0;&#10;S Sylinder_bor_opp = 0;" fileName="" height="70" id="d4568783-1da4-4ab5-9fef-b86a77068a52" name="aapne laas" useIcon="0" width="200" x="470" y="705"/>
   <GCStep actionBlockVisible="1" actionText="S motor_tallerken = 1;" fileName="" height="70" id="c04ef54a-51b6-413f-b2f5-0378cf409eae" name="roter_tallerken" useIcon="0" width="200" x="470" y="835"/>
   <GCTransition actionText="S_laas_inn" conditionVisible="1" height="25" id="59867e8f-7ba1-45a5-acfc-8c6228d98330" width="30" x="485" y="790"/>
-  <GCTransition actionText="S_tallerken == 0" conditionVisible="1" height="25" id="350ffe2b-f442-4385-839b-5ad434c73a7a" width="30" x="485" y="920"/>
+  <GCTransition actionText="S_tallerken" conditionVisible="1" height="25" id="350ffe2b-f442-4385-839b-5ad434c73a7a" width="30" x="485" y="920"/>
   <GCLink fromObject="50438ab6-9fc6-49ba-9d3b-015d95318e5d" manAdj="0" toObject="84525264-fd91-4d40-8482-c3b8a19e3a39">
     <Stroke x="500" y="186"/>
     <Stroke x="500" y="196"/>

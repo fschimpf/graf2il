@@ -137,7 +137,7 @@ for initialStep in root.findall('GCInitialStep'):
     stepMem = MDict[stepName]           # find Memory-Bit
 outfile.write ('=       {0}\n'.format(stepMem))
 print '... done'
-
+print
 print 'Created memory list:'
 print MDict
 print
