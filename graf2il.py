@@ -235,6 +235,7 @@ print
 
 print 'generating output networks'
 def parse_actions (actionstring, outputfile, outDict):
+    inverted = 0
     actionstring = actionstring.strip()    
     separated = actionstring.partition(';')
     action = separated[0].strip()
@@ -245,10 +246,21 @@ def parse_actions (actionstring, outputfile, outDict):
     separated = output.partition(' ')
     if separated[0] == 'S':
         output = separated[2].strip()
+        outputChannel = outDict[output]
+        if outputChannel[0] == '/':         # channel has to be inverted
+            inverted = 1
+            outputChannel = outputChannel[1:]     # remove '/' from channel-string
+
         if setReset == '1':
-            outputfile.write ('S       {0}, 1\n'.format(outDict[output]))   #set output
+            if inverted == 0:
+                outputfile.write ('S       {0}, 1\n'.format(outputChannel))   #set output
+            else:
+                outputfile.write ('R       {0}, 1\n'.format(outputChannel))   #reset output
         elif setReset == '0':
-            outputfile.write ('R       {0}, 1\n'.format(outDict[output]))   #reset output
+            if inverted == 0:
+                outputfile.write ('R       {0}, 1\n'.format(outputChannel))   #reset output
+            else:
+                outputfile.write ('S       {0}, 1\n'.format(outputChannel))   #set output  
         else:
             raise NameError, 'unsupported output value'
     else:
