@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'sekvens.ui'
+# Form implementation generated from reading ui file 'sekvens_gui.ui'
 #
-# Created: Thu Dec 11 23:15:39 2014
+# Created: Thu Dec 11 23:40:38 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(726, 350)
+        MainWindow.resize(732, 350)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.verticalLayout = QtGui.QVBoxLayout(self.centralwidget)
@@ -101,6 +101,9 @@ class Ui_MainWindow(object):
         self.lineEdit.setReadOnly(True)
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
         self.horizontalLayout_2.addWidget(self.lineEdit)
+        self.pushButton_3 = QtGui.QPushButton(self.frame_2)
+        self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
+        self.horizontalLayout_2.addWidget(self.pushButton_3)
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_4.addLayout(self.verticalLayout_3)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -133,7 +136,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.frame_3)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 726, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 732, 25))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuInfo = QtGui.QMenu(self.menubar)
         self.menuInfo.setObjectName(_fromUtf8("menuInfo"))
@@ -160,6 +163,7 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Start JGrafchart", None))
         self.label_2.setText(_translate("MainWindow", "2. Oversett til Step 7", None))
         self.label_5.setText(_translate("MainWindow", "JGrafchart-fil (.xml)", None))
+        self.pushButton_3.setText(_translate("MainWindow", "Velg", None))
         self.pushButton_2.setText(_translate("MainWindow", "Oversett til Step7", None))
         self.label_3.setText(_translate("MainWindow", "3. Nesten ferdig. Start Step7, gå til \"File - Import\" og last inn .awl-filen! ", None))
         self.menuInfo.setTitle(_translate("MainWindow", "Info", None))

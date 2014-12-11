@@ -9,21 +9,32 @@ class MeinProgramm(QtGui.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         
         # connect slots for GUI-elements
-        #self.connect(self.pushButton, QtCore.SIGNAL('clicked ()'), self.on_send_serial_command)
-        #self.connect(self.pushButton_2, QtCore.SIGNAL('clicked (bool)'), self.toggle_SlowPWM)        
-        #self.connect(self.checkBox, QtCore.SIGNAL('clicked (bool)'), self.activateAutoADCReload)   
+        self.connect(self.pushButton, QtCore.SIGNAL('clicked ()'), self.startJGrafchart)
+        self.connect(self.pushButton_2, QtCore.SIGNAL('clicked (bool)'), self.start_graf2il)        
+        self.connect(self.pushButton_3, QtCore.SIGNAL('clicked (bool)'), self.chooseInFile)   
 
+    def startJGrafchart(self):
+        self.statusBar().showMessage('starter JGrafchart')
+
+    def start_graf2il(self):
+        self.statusBar().showMessage('starter graf2il')
+
+    def chooseInFile(self):
+        self.statusBar().showMessage('Velg inputfil')
+        fileName = QtGui.QFileDialog.getOpenFileName(self, 'Velg fil som skal bli oversatt', '', selectedFilter='*.xml')
+        self.lineEdit.setText(fileName)
+        
 
 app = QtGui.QApplication(sys.argv)
 #locale = QtCore.QLocale.system().name()
 locale = "nb_NO"
 #locale = "de_DE"
 #locale = "en_EN"
-print (locale)
+#print (locale)
 translator = QtCore.QTranslator()
 if translator.load("translation_" + locale, "./"):
     app.installTranslator(translator)
 programm = MeinProgramm()
 programm.show()
 sys.exit(app.exec_())   # infinite loop
-self.ser.close()        # close serial port
+
