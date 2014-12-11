@@ -115,6 +115,7 @@ print 'found transitions:'
 nTransition = 0                                     # counter for Transitions
 transitionList = []                                 # create empty list for storing transition data
 for transition in root.findall('GCTransition'):
+    invertingInput = 0    
     nTransition = nTransition + 1
     name = transition.get('actionText')
     eid = transition.get('id')
@@ -141,7 +142,10 @@ for transition in root.findall('GCTransition'):
     nameString = 'Transition_{0}_{1}'.format(fromStepn, toStepn)    # generate name-sring for Transition
         
     # evaluate condition (so far only support for one condition, check if true)
-    condition = digInDict[name]    
+    condition = digInDict[name]
+    if condition[0] == '/':          # If inverting input...
+        invertingInput = 1
+        condition = condition[1:]   # Remove first character '/'   
 
 
     thisTransition = nTransition, nameString, eid, fromStepn, toStepn, condition, mem(nextM)     # pack tuple with transition info
@@ -154,7 +158,11 @@ for transition in root.findall('GCTransition'):
     nextNetwork = nextNetwork + 1
 
     outfile.write ('LD      {0}\n'.format(fromStep[4]))       # LD fromStep memory (in element 4)
-    outfile.write ('A       {0}\n'.format(condition))         # A condition
+    
+    if invertingInput == 0:    
+        outfile.write ('A       {0}\n'.format(condition))         # A condition
+    else:
+        outfile.write ('AN      {0}\n'.format(condition))         # A condition
     outfile.write ('=       {0}\n'.format(thisTransition[6])) # = Mem (thisTransition) (in element 6)
 
 for thisTransition in transitionList:
