@@ -5,7 +5,7 @@ import sys
 filename = sys.argv[1] #get filename for xml-file from command line
 print
 print 'graf2il - converts a JGrafchart xml-file to Siemens Step 7 awl-file'
-print 'Fritz Schimpf, version 0.1'
+print 'Fritz Schimpf, version 0.2'
 print
 print 'opening file: ', filename
 print
@@ -37,9 +37,9 @@ for dout in root.findall('DigitalOut'):
 #print digOutDict
 print 'found in- and outputs:'
 for i in sorted(digInDict):
-    print i.ljust(30), digInDict[i]
+    print digInDict[i].ljust(5), i
 for i in sorted(digOutDict):
-    print i.ljust(30), digOutDict[i]
+    print digOutDict[i].ljust(5), i
 print
 
 MDict = {}          # create Dictionary for PLC-Memory-Bits
@@ -55,34 +55,53 @@ def mem(n):
     memstring = 'M{0[0]}.{0[1]}'.format(mBit)
     return memstring
 
-print 'found initial step:'
+#print 'found initial step:'
 # Fix: Fehler abfangen: Kein Initial Step / mehrere
+
+stepList = []                                 # create empty list for storing transition data
+
 for initialStep in root.findall('GCInitialStep'):
     name = initialStep.get('name')
     action = initialStep.get('actionText')
     eid = initialStep.get('id')
-    print name, action, eid
+    #print name, action, eid
     nameString = 'Initial_Step_{0}'.format(name)    # generate name-sring for State
     MDict[nameString] = mem(nextM)                  # add name and M to dictionary
-    nextM = nextM + 1
+
     stepDict[eid] = nextStep                        # add Step-ID to dictionary
     stepNameDict[eid] = nameString                  # add Step name to dictionary
+
+    # new: Add step to stepList    
+    thisStep = nextStep, nameString, action, eid, mem(nextM)
+    stepList.append(thisStep)
+
+    nextM = nextM + 1
     nextStep = nextStep + 1
-print
+
+#print
 print 'found step(s):'
 for step in root.findall('GCStep'):
     name = step.get('name')
     action = step.get('actionText')
     eid = step.get('id')
-    print name, action, eid
+    # print name, action, eid
     nameString = 'Step_{0}_{1}'.format(nextStep, name)    # generate name-sring for State
     MDict[nameString] = mem(nextM)                  # add name and M to dictionary
-    nextM = nextM + 1
     stepDict[eid] = nextStep                        # add Step-ID to dictionary 
     stepNameDict[eid] = nameString                  # add Step name to dictionary
+    
+    # new: Add step to stepList    
+    thisStep = nextStep, nameString, action, eid, mem(nextM)
+    stepList.append(thisStep)
+    
+    nextM = nextM + 1
     nextStep = nextStep + 1
+
+for thisStep in stepList:
+    n, name, action, eid, memory = thisStep    
+    print str(n).ljust(3), memory.ljust(5), name
 print
-print 'Translating transitions:'
+print 'found transitions:'
 nTransition = 0                                     # counter for Transitions
 transitionList = []                                 # create empty list for storing transition data
 for transition in root.findall('GCTransition'):
@@ -135,11 +154,13 @@ for transition in root.findall('GCTransition'):
     outfile.write ('A       {0}\n'.format(condition))
     outfile.write ('=       {0}\n'.format(MDict[nameString]))
 
-print transitionList
+for thisTransition in transitionList:
+    nTransition, name, eid, fromStepn, toStepn, condition, memory = thisTransition
+    print str(nTransition).ljust(3), memory.ljust(5), name
 
-print '... done'
+
 print
-print 'Translating initial condition: '
+print 'generating initial condition:'
 outfile.write ('Network {0} // Initial condition\n'.format(nextNetwork))
 nextNetwork = nextNetwork + 1
 nStep = 0
@@ -211,15 +232,52 @@ print 'generating step activation networks'
     outfile.write ('=       {0}\n'.format(toStepMem))
 """
 
+def findStepN(n, sList):
+    "Find tuple step from unsorted stepList which has index n"
+    for step in sList:
+        number, name, action, eid, memory = step         
+        if number != n:                             # in number we are looking for is not found, ...
+            returnStep = []                         # make empty return
+        else:
+            returnStep = step                       # found, return current step and
+            break                                   # exit for-loop
+    if returnStep == []:
+        raise NameError, 'Step index not found' 
+    return (returnStep)
+
+def findTransitionsFromStep (n, tList):
+    "Find all transitions originating from step n"
+    returnTransitions = []              # create empty List for returning result    
+    for transition in tList:
+        nTr, nameTr, eidTr, fromStepNTr, toStepNTr, PLCInputTr, memoryTr = transition   # unpack current transition
+        if fromStepNTr == n:
+            returnTransitions.append(transition)    # append current transition if fromStep matches index
+    if returnTransitions == []:
+        raise NameError, 'No transition from Step x found.'
+    return (returnTransitions)    
+    
 
 for thisTransition in transitionList:
-    nTransition, name, eid, fromStep, toStep, PLCInput, memory = thisTransition 
-    outfile.write ('Network {0} // {1} activates Step {2}\n'.format(nextNetwork, name, toStep))
+    nTransition, name, eid, fromStepN, toStepN, PLCInput, memory = thisTransition # unpack info about current transition
+    
+    toStep = findStepN(toStepN, stepList)   # find info about next Step
+
+    toStepN, toStepName, toStepAction, toStepEid, toStepMemory = toStep # unpack info about toStep
+
+    nextTransitions = findTransitionsFromStep (toStepN, transitionList) # find next Transition(s)
+
+
+    # write the stuff into awl
+    outfile.write ('Network {0} // {1} activates {2}\n'.format(nextNetwork, name, toStepName))
     nextNetwork = nextNetwork + 1    
 
     outfile.write ('LD      {0}\n'.format(memory))              #LD M_transition
-    # hier fehlendes Zeug einfuegen. Neue Liste fuer Steps anlegen. Suchfunktionen fuer elemente schreiben.    
-    #outfile.write ('O       {0}\n'.format(toStepMem))           # O M_toStep
+    outfile.write ('O       {0}\n'.format(toStepMemory))        # O M_toStep
+
+    # tricky part: add all following transistions away from toStep as NOTs
+    for nextTran in nextTransitions:
+        outfile.write ('AN      {0}\n'.format(nextTran[6]))     # AN memory of nextTran (mem is element no. 6)
+    outfile.write ('=       {0}\n'.format(toStepMemory))        # network activates next Step
 
 
 print '... done'
