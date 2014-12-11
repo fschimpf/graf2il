@@ -282,7 +282,7 @@ nextStep = 0
 for step in stepList:
     n, name, action, eid, memory = step
 
-    if action != '':  
+    if action.strip() != '':  
         outfile.write ('Network {0} // set outputs for {1}\n'.format(nextNetwork, name))
         nextNetwork = nextNetwork + 1
 
