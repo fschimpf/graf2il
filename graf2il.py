@@ -167,9 +167,16 @@ def main():
 
     print
 
-    print 'Generating .awl'
-    error = generateAWL(filename, stepList, transitionList, digInDict, digOutDict)
-    print '.awl generated successfully :-)'
+    if outputType == 'awl':
+        print 'Generating .awl'
+        generateAWL(filename, stepList, transitionList, digInDict, digOutDict)
+    elif outputType == 'scl':
+        print 'Generating .scl'
+        print 'Not implemented yet.'        
+        #generateAWL(filename, stepList, transitionList, digInDict, digOutDict)
+    else:
+        print 'No valid output type selected. No output file created. Valid types are: awl, scl'
+
 
 if __name__ == '__main__':  
     main()

@@ -150,3 +150,4 @@ def generateAWL(filename, stepList, transitionList, digInDict, digOutDict):
     # write footer of .awl and close file
     outfile.write('END_ORGANIZATION_BLOCK\nSUBROUTINE_BLOCK SBR_0:SBR0\nTITLE=SUBROUTINE COMMENTS\nBEGIN\nNetwork 1 // Network Title\n// Network Comment\nEND_SUBROUTINE_BLOCK\nINTERRUPT_BLOCK INT_0:INT0\nTITLE=INTERRUPT ROUTINE COMMENTS\nBEGIN\nNetwork 1 // Network Title\n// Network Comment\nEND_INTERRUPT_BLOCK\n')
     outfile.close()
+    print '.awl generated successfully. :-)'
