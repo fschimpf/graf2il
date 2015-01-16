@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import sys
-from generateAWL import generateAWL 
+from generateAWL import generateAWL
+from generateSCL import generateSCL 
 
 def main():
     filename = sys.argv[1]      # get filename for xml-file from command line
@@ -172,8 +173,7 @@ def main():
         generateAWL(filename, stepList, transitionList, digInDict, digOutDict)
     elif outputType == 'scl':
         print 'Generating .scl'
-        print 'Not implemented yet.'        
-        #generateAWL(filename, stepList, transitionList, digInDict, digOutDict)
+        generateSCL(filename, stepList, transitionList, digInDict, digOutDict)
     else:
         print 'No valid output type selected. No output file created. Valid types are: awl, scl'
 
