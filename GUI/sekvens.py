@@ -1,6 +1,7 @@
 import sys
 from PyQt4 import QtGui, QtCore
 from sekvens_gui import Ui_MainWindow
+import graf2il
 
 class MeinProgramm(QtGui.QMainWindow, Ui_MainWindow):
 
@@ -18,6 +19,7 @@ class MeinProgramm(QtGui.QMainWindow, Ui_MainWindow):
 
     def start_graf2il(self):
         self.statusBar().showMessage('starter graf2il')
+        graf2il.main('test.xml')
 
     def chooseInFile(self):
         self.statusBar().showMessage('Velg inputfil')
