@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>732</width>
-    <height>350</height>
+    <width>823</width>
+    <height>367</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -58,9 +58,10 @@
             <string>Tipps:
  - Elementer du kan bruke er: Input, inverting input, output, inverting output,
     initial step, step, transition.
- - Lagre filen som .xml
- - Du må allted ha med minst en &quot;initial step&quot; og en &quot;step&quot;
- - Bruk &quot;compile&quot; knappen for å sjekke om det fins feil før du prøver å oversette.</string>
+ - Lagre filen som .xml.
+ - Du må ha minst en &quot;initial step&quot; og en &quot;step&quot;.
+ - Bruk &quot;compile&quot; knappen i JGrafchart for å sjekke om det fins feil før du
+   prøver å oversette.</string>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -166,6 +167,31 @@
            </item>
           </layout>
          </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>oversett til PLS-språk (type PLS)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="comboBox">
+             <item>
+              <property name="text">
+               <string>.awl (S7-200)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>.scl (S7-1200)</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
         </layout>
        </item>
        <item>
@@ -210,32 +236,6 @@
       </layout>
      </widget>
     </item>
-    <item>
-     <widget class="QFrame" name="frame_3">
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QLabel" name="label_3">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>3. Nesten ferdig. Start Step7, gå til &quot;File - Import&quot; og last inn .awl-filen! </string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -243,7 +243,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>732</width>
+     <width>823</width>
      <height>25</height>
     </rect>
    </property>
