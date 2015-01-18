@@ -9,10 +9,10 @@ The toolchain consisting JGrafchart and graf2il makes it possible to program con
 1. Create a control graph in JGrafchart.
 2. Use the Compile-Button in JGrafchart to find any errors.
 3. Save the project as an .xml-file
-4. Invoke graf2il: python graf2il.py <your-control-sequence.xml> awl
-5. graf2il creates the file <your-control-sequence.awl>
+4. Invoke graf2il: python graf2il.py "your-control-sequence.xml" awl
+5. graf2il creates the file "your-control-sequence.awl"
 6. Start Step7, create a new project for any S7-200 PLC.
-7. Go to File-Import and choose the file <your-control-sequence.awl>
+7. Go to File-Import and choose the file "your-control-sequence.awl"
 8. Download the program to the PLC and test...
 
 
@@ -32,9 +32,9 @@ Input and output blocks:
 - All inputs and outputs used in the program have to be defined by digital input or output blocks. 
 
 Step actions can only be
-- "S <output> = 1;" for setting an output
-- or "S <output> = 0;" for resetting an output.
-- <output> has to be defined by an output or inverting output block.
+- "S yourOutput = 1;" for setting an output
+- or "S yourOutput = 0;" for resetting an output.
+- "yourOutput" has to be defined by an output or inverting output block.
 - it is possible to have more than one action per step.
 
 Transitions:
@@ -51,7 +51,7 @@ Transitions:
 
 #Copyright
     
-Copyright 2015 Fritz Schimpf    
+Copyright 2015 Fritz Schimpf
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
