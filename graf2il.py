@@ -181,7 +181,7 @@ def main():
     for step in stepList:
         print step[4].ljust(5), step[1]
     for transition in transitionList:
-        print transition[6].ljust(5), transition[1]
+        print transition[7].ljust(5), transition[1]
 
     print
 
