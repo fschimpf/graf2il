@@ -59,7 +59,30 @@ def generateSCL(filename, stepList, transitionList, digInDict, digOutDict):
         nTransition, name, eid, fromStepn, fromStepMem, toStepn, condition, memory = thisTransition  # unpack tuple from List 
         outfile.write ('    IF #{0} AND #{1} THEN\n'.format(fromStepn, condition))  
         outfile.write ('        {0} := TRUE;\n'.format(name))
-        outfile.write ('    END_IF\n')      
+        outfile.write ('    END_IF;\n')      
+    outfile.write ('\n')    
+
+    # set initial state
+    outfile.write ('    (* Set initial state if none is active *)\n')
+    outfile.write ('    IF NOT (')
+
+    nStep = 0
+    for thisStep in stepList:
+        number, name, action, eid, memory = thisStep    # unpack tuple
+        if nStep == 0:      # initial step, do nothing
+            a = 1
+        elif nStep == 1:    # first step:
+            outfile.write ('#{0}'.format(name))            # "#variableName"
+        else:
+            outfile.write (' OR #{0}'.format(name))      # "OR #variableName" for all other steps
+        nStep = nStep + 1
+
+    outfile.write (') THEN\n')      # finish the line
+    number, name, action, eid, memory = stepList[0]    # unpack tuple for initial step
+    outfile.write ('        #{0} := TRUE;\n'.format(name))
+    outfile.write ('    END_IF;\n\n')
+ 
+
 
     
 
