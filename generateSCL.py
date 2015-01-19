@@ -46,8 +46,22 @@ def generateSCL(filename, stepList, transitionList, digInDict, digOutDict):
         outfile.write ('        {0} : Bool;\n'.format(name))
     
     # create variables for transitions:
-
+    for thisTransition in transitionList:
+        nTransition, name, eid, fromStepn, fromStepMem, toStepn, condition, memory = thisTransition  # unpack tuple from List 
+        outfile.write ('        {0} : Bool;\n'.format(name))
     outfile.write ('    END_VAR\n\n')
+
+    # start to write program block, transitions
+    outfile.write ('BEGIN\n')
+    outfile.write ('    (* Transitions *)\n')
+
+    for thisTransition in transitionList:
+        nTransition, name, eid, fromStepn, fromStepMem, toStepn, condition, memory = thisTransition  # unpack tuple from List 
+        outfile.write ('    IF #{0} AND #{1} THEN\n'.format(fromStepn, condition))  
+        outfile.write ('        {0} := TRUE;\n'.format(name))
+        outfile.write ('    END_IF\n')      
+
+    
 
 
     # write footer and close file
