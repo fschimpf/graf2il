@@ -147,8 +147,6 @@ def generateAWL(filename, stepList, transitionList, digInDict, digOutDict):
             parse_actions (remainder, outputfile, outDict)
 
 
-    nextStep = 0
-        
     for step in stepList:
         n, name, action, eid, memory = step
 
@@ -157,7 +155,6 @@ def generateAWL(filename, stepList, transitionList, digInDict, digOutDict):
             nextNetwork = nextNetwork + 1
 
             outfile.write ('LD      {0}\n'.format(memory))   #LD M_Step
-            nextStep = nextStep + 1
         
             # action-string zerlegen und als actions reinschreiben
             parse_actions (action, outfile, digOutDict)

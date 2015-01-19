@@ -56,8 +56,10 @@ def generateSCL(filename, stepList, transitionList, digInDict, digOutDict):
     outfile.write ('    (* Transitions *)\n')
 
     for thisTransition in transitionList:
-        nTransition, name, eid, fromStepn, fromStepMem, toStepn, condition, memory = thisTransition  # unpack tuple from List 
-        outfile.write ('    IF #{0} AND #{1} THEN\n'.format(fromStepn, condition))  
+        nTransition, name, eid, fromStepn, fromStepMem, toStepn, condition, memory = thisTransition  # unpack tuple from List
+        conditionVariableName = 'switch_xyz'    # REPLACE!
+        fromStepName = 'fromStepName'           # REPLACE! 
+        outfile.write ('    IF #{0} AND #{1} THEN\n'.format(fromStepName, conditionVariableName))  
         outfile.write ('        {0} := TRUE;\n'.format(name))
         outfile.write ('    END_IF;\n')      
     outfile.write ('\n')    
@@ -82,9 +84,66 @@ def generateSCL(filename, stepList, transitionList, digInDict, digOutDict):
     outfile.write ('        #{0} := TRUE;\n'.format(name))
     outfile.write ('    END_IF;\n\n')
  
+    # let transitions activate states:
+    outfile.write ('    (* Transitions activate steps *)\n')
+    for thisTransition in transitionList:
+        nTransition, name, eid, fromStepn, fromStepMem, toStepn, condition, memory = thisTransition  # unpack tuple from List
+        toStepName = 'toStepName'                       # REPLACE!
+        nextTransitionName = 'nextTransitionName'       # REPLACE!
+        outfile.write ('    IF (#{0} OR #{1}) AND NOT #{2} THEN\n'.format(name, toStepName, nextTransitionName))
+        outfile.write ('        #{0} := TRUE;\n'.format(toStepName))
+        outfile.write ('    END_IF;\n')
+    outfile.write ('\n')  
+
+    # set outputs:
+    def parse_actions (actionstring, outputfile, outDict):
+        "parses the action string and writes result into .scl-file. Calls itself recursively."
+        inverted = 0
+        actionstring = actionstring.strip()    
+        separated = actionstring.partition(';')
+        action = separated[0].strip()
+        remainder = separated[2].strip()    
+        separated = action.partition('=')
+        output = separated[0].strip()
+        setReset = separated[2].strip()
+        separated = output.partition(' ')
+        if separated[0] == 'S':
+            output = separated[2].strip()
+            outputChannel = outDict[output]
+            if outputChannel[0] == '/':         # channel has to be inverted
+                inverted = 1
+                outputChannel = outputChannel[1:]     # remove '/' from channel-string
+
+            if setReset == '1':
+                if inverted == 0:
+                    outputfile.write ('        #{0} := TRUE;\n'.format(output))   #set output
+                else:
+                    outputfile.write ('        #{0} := FALSE;\n'.format(output))   #reset output
+            elif setReset == '0':
+                if inverted == 0:
+                    outputfile.write ('        #{0} := FALSE;\n'.format(output))   #reset output
+                else:
+                    outputfile.write ('        #{0} := TRUE;\n'.format(output))   #set output  
+            else:
+                raise NameError, 'unsupported output value'
+        else:
+            raise NameError, 'unsupported output action'
+        if remainder != '':
+            parse_actions (remainder, outputfile, outDict)
 
 
-    
+    outfile.write ('    (* Set outputs *)\n')
+    for thisStep in stepList:
+        number, name, action, eid, memory = thisStep    # unpack tuple
+        if action.strip() != '':
+            outfile.write ('    IF #{0} THEN\n'.format(name))
+            parse_actions (action, outfile, digOutDict) # action-string zerlegen und als actions reinschreiben
+            outfile.write ('    END_IF;\n')
+    outfile.write ('\n') 
+
+        
+
+
 
 
     # write footer and close file
