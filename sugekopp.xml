@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GCDocument color="-1" dimTicks="25" dpwsInterface="" dpwsPort="-1" height="623" horizontalScrollBar="1" modifiable="1" name="J1" saveVersion="8" scale="1.11" simulationMode="1" socketHost="" socketIsServer="0" socketPort="-1" socketSendMode="Changed" threadSpeed="40" tokenLuminance="0" verticalScrollBar="1" viewPositionX="0" viewPositionY="0" width="830" x="0" y="0">
+  <DigitalIn channel="I0.0" cyclic="1" height="60" name="switch_new_part" value="0" width="80" x="50" y="30"/>
+  <DigitalIn channel="I0.1" cyclic="1" height="60" name="switch_arm_home" value="0" width="80" x="50" y="140"/>
+  <DigitalIn channel="I0.2" cyclic="1" height="60" name="switch_arm_out" value="0" width="80" x="50" y="250"/>
+  <DigitalOut channel="Q0.0" height="60" name="valve_arm" value="0" width="80" x="270" y="30"/>
+  <DigitalOut channel="Q0.1" height="60" name="valve_vacuum" value="0" width="80" x="270" y="140"/>
+  <GCInitialStep actionBlockVisible="1" actionText="S valve_arm = 0;&#10;S valve_vacuum = 0;" fileName="" height="70" id="3990cbb7-5799-4020-9b1c-9e5697b657dc" name="Home Position" useIcon="0" width="200" x="500" y="115"/>
+  <GCTransition actionText="switch_new_part" conditionVisible="1" height="25" id="1943b516-3477-423e-a3ac-2102e0abfa1b" width="30" x="515" y="210"/>
+  <GCStep actionBlockVisible="1" actionText="S valve_arm = 1;" fileName="" height="70" id="580ad9ea-0d3c-477d-bbe5-cc4343e4f023" name="move arm to part" useIcon="0" width="200" x="500" y="275"/>
+  <GCTransition actionText="switch_arm_out" conditionVisible="1" height="25" id="9ee93f3a-bf3d-4e81-9a6d-240e671da7fd" width="30" x="515" y="370"/>
+  <GCStep actionBlockVisible="1" actionText="S valve_vacuum = 1;&#10;S valve_arm = 0;" fileName="" height="70" id="fa9ff27f-e3ba-4eb4-a4e6-a42c815433a0" name="turn on vacuum and move back" useIcon="0" width="200" x="500" y="425"/>
+  <GCTransition actionText="switch_arm_home" conditionVisible="1" height="25" id="4104c29f-a156-46c4-be6e-ba0c853a2835" width="30" x="515" y="510"/>
+  <GCLink fromObject="3990cbb7-5799-4020-9b1c-9e5697b657dc" manAdj="0" toObject="1943b516-3477-423e-a3ac-2102e0abfa1b">
+    <Stroke x="530" y="186"/>
+    <Stroke x="530" y="196"/>
+    <Stroke x="530" y="197"/>
+    <Stroke x="530" y="197"/>
+    <Stroke x="530" y="199"/>
+    <Stroke x="530" y="209"/>
+  </GCLink>
+  <GCLink fromObject="1943b516-3477-423e-a3ac-2102e0abfa1b" manAdj="0" toObject="580ad9ea-0d3c-477d-bbe5-cc4343e4f023">
+    <Stroke x="530" y="236"/>
+    <Stroke x="530" y="246"/>
+    <Stroke x="530" y="255"/>
+    <Stroke x="530" y="255"/>
+    <Stroke x="530" y="264"/>
+    <Stroke x="530" y="274"/>
+  </GCLink>
+  <GCLink fromObject="580ad9ea-0d3c-477d-bbe5-cc4343e4f023" manAdj="0" toObject="9ee93f3a-bf3d-4e81-9a6d-240e671da7fd">
+    <Stroke x="530" y="346"/>
+    <Stroke x="530" y="356"/>
+    <Stroke x="530" y="357"/>
+    <Stroke x="530" y="357"/>
+    <Stroke x="530" y="359"/>
+    <Stroke x="530" y="369"/>
+  </GCLink>
+  <GCLink fromObject="9ee93f3a-bf3d-4e81-9a6d-240e671da7fd" manAdj="0" toObject="fa9ff27f-e3ba-4eb4-a4e6-a42c815433a0">
+    <Stroke x="530" y="396"/>
+    <Stroke x="530" y="406"/>
+    <Stroke x="530" y="410"/>
+    <Stroke x="530" y="410"/>
+    <Stroke x="530" y="414"/>
+    <Stroke x="530" y="424"/>
+  </GCLink>
+  <GCLink fromObject="fa9ff27f-e3ba-4eb4-a4e6-a42c815433a0" manAdj="0" toObject="4104c29f-a156-46c4-be6e-ba0c853a2835">
+    <Stroke x="530" y="496"/>
+    <Stroke x="530" y="506"/>
+    <Stroke x="530" y="506"/>
+    <Stroke x="530" y="499"/>
+    <Stroke x="530" y="499"/>
+    <Stroke x="530" y="509"/>
+  </GCLink>
+  <GCLink fromObject="4104c29f-a156-46c4-be6e-ba0c853a2835" manAdj="1" toObject="3990cbb7-5799-4020-9b1c-9e5697b657dc">
+    <Stroke x="530" y="536"/>
+    <Stroke x="530" y="546"/>
+    <Stroke x="783" y="546"/>
+    <Stroke x="783" y="104"/>
+    <Stroke x="530" y="104"/>
+    <Stroke x="530" y="114"/>
+  </GCLink>
+</GCDocument>

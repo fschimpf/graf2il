@@ -1,0 +1,73 @@
+﻿FUNCTION_BLOCK "sekvens_handgemacht"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      switch_new_part : Bool;
+      switch_arm_home : Bool;
+      switch_arm_out : Bool;
+   END_VAR
+
+   VAR_OUTPUT 
+      valve_arm : Bool;
+      valve_vacuum : Bool;
+   END_VAR
+
+   VAR 
+      state0_home_position : Bool;
+      state1_move_arm_to_part : Bool;
+      state2_turn_on_vacuum_and_move_back : Bool;
+   END_VAR
+   VAR RETAIN
+      transition01 : Bool;
+      transition12 : Bool;
+      transition20 : Bool;
+   END_VAR
+
+
+BEGIN
+	(* Transitions *)
+	IF #state0_home_position AND #switch_new_part THEN
+	  #transition01 := TRUE;
+	END_IF;
+	IF #state1_move_arm_to_part AND #switch_arm_out THEN
+	  #transition12 := TRUE;
+	END_IF;
+	IF #state2_turn_on_vacuum_and_move_back AND #switch_arm_home THEN
+	  #transition20 := TRUE;
+	END_IF;
+	
+	(* Set initial state if none is active *)
+	IF NOT (#state1_move_arm_to_part OR #state2_turn_on_vacuum_and_move_back) THEN
+	  #state0_home_position := TRUE;
+	END_IF;
+	
+	(* Transitions activate new states: *)
+	IF (#transition01 OR #state1_move_arm_to_part) AND NOT #transition12 THEN
+	  #state1_move_arm_to_part := TRUE;
+	END_IF;
+	IF (#transition12 OR #state2_turn_on_vacuum_and_move_back) AND NOT #transition20 THEN
+	  #state2_turn_on_vacuum_and_move_back := TRUE;
+	END_IF;
+	IF (#transition20 OR #state0_home_position) AND NOT #transition01 THEN
+	  #state0_home_position := TRUE;
+	END_IF;
+	
+	(* Set outputs depending on step *)
+	IF #state0_home_position THEN
+	  #valve_arm := FALSE;
+	  #valve_vacuum := FALSE;
+	END_IF;
+	IF #state1_move_arm_to_part THEN
+	  #valve_arm := TRUE;
+	  #valve_vacuum := FALSE;
+	END_IF;
+	IF #state2_turn_on_vacuum_and_move_back THEN
+	  #valve_arm := FALSE;
+	  #valve_vacuum := TRUE;
+	END_IF;
+	
+	
+	
+	
+END_FUNCTION_BLOCK
+
