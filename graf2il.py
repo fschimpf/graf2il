@@ -68,7 +68,7 @@ def main():
     print
 
 
-    # Parse sequence-Steps from XML and store them in stepList
+    # Parse steps from XML and store them in stepList
 
     def mem(n):
         "Generate memory-bit-notation (e.g. M0.0) from number of memory-bit (Mx.y)"
@@ -83,7 +83,7 @@ def main():
     stepList = []                                 # create empty list for storing transition data
 
     for initialStep in root.findall('GCInitialStep'):
-        name = initialStep.get('name')
+        name = initialStep.get('name').replace(' ','_') # get namestring and replace spaces by _
         action = initialStep.get('actionText')
         eid = initialStep.get('id')
         nameString = 'Initial_Step_{0}'.format(name)    # generate name-sring for State
@@ -96,7 +96,7 @@ def main():
         nextStep = nextStep + 1
 
     for step in root.findall('GCStep'):
-        name = step.get('name')
+        name = step.get('name').replace(' ','_') # get namestring and replace spaces by _
         action = step.get('actionText')
         eid = step.get('id')
         nameString = 'Step_{0}_{1}'.format(nextStep, name)    # generate name-sring for State
