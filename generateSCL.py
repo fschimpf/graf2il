@@ -137,6 +137,11 @@ def generateSCL(filename, stepList, transitionList, digInDict, digOutDict):
             outfile.write(' AND NOT #{0}'.format(nextTran[1]))  # (variable-) name of transition is Element 1.
         outfile.write (' THEN\n')
         outfile.write ('        #{0} := TRUE;\n'.format(toStepName))
+
+        fromStep = findStepN(fromStepn, stepList)                                       # get info about previous step
+        fromStepn, fromStepName, fromStepAction, fromStepEid, fromStepMemory = fromStep # unpack info about toStep
+        outfile.write ('        #{0} := FALSE;\n'.format(fromStepName))                 # deactivate previous state
+        outfile.write ('        #{0} := FALSE;\n'.format(name))                         # deactivate transition
         outfile.write ('    END_IF;\n')
     outfile.write ('\n')  
 
