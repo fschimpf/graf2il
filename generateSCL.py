@@ -178,6 +178,8 @@ def generateSCL(filename, stepList, transitionList, digInDict, digOutDict):
             else:
                 raise NameError, 'unsupported output value'
         else:
+            print 'Error: unsupported output action: ', actionstring
+            print
             raise NameError, 'unsupported output action'
         if remainder != '':
             parse_actions (remainder, outputfile, outDict)
@@ -186,7 +188,7 @@ def generateSCL(filename, stepList, transitionList, digInDict, digOutDict):
     outfile.write ('    (* Set outputs *)\n')
     for thisStep in stepList:
         number, name, action, eid, memory = thisStep    # unpack tuple
-        if action.strip() != '':
+        if (action.strip() != '') and (action.strip() != ';'): 
             outfile.write ('    IF #{0} THEN\n'.format(name))
             parse_actions (action, outfile, digOutDict) # action-string zerlegen und als actions reinschreiben
             outfile.write ('    END_IF;\n')

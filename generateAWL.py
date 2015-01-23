@@ -142,6 +142,8 @@ def generateAWL(filename, stepList, transitionList, digInDict, digOutDict):
             else:
                 raise NameError, 'unsupported output value'
         else:
+            print 'Error: unsupported output action: ', actionstring
+            print
             raise NameError, 'unsupported output action'
         if remainder != '':
             parse_actions (remainder, outputfile, outDict)
@@ -150,7 +152,7 @@ def generateAWL(filename, stepList, transitionList, digInDict, digOutDict):
     for step in stepList:
         n, name, action, eid, memory = step
 
-        if action.strip() != '':  
+        if (action.strip() != '') and (action.strip() != ';'):  
             outfile.write ('Network {0} // set outputs for {1}\n'.format(nextNetwork, name))
             nextNetwork = nextNetwork + 1
 
