@@ -4,8 +4,10 @@ graf2il is a python script for translating a .xml-file created with JGrafchart (
 
 The toolchain consisting JGrafchart and graf2il makes it possible to program control sequences for the S7-200 PLCs in a graphical way.
 
+Update: SCL is supported as second target language. This makes it possible to generate source files which can be imported into TIA portal. The sequence can then be integrated into the project as a function block.
 
-#Usage: 
+
+##Usage for S7-200
 1. Create a control graph in JGrafchart.
 2. Use the Compile-Button in JGrafchart to find any errors.
 3. Save the project as an .xml-file
@@ -16,7 +18,20 @@ The toolchain consisting JGrafchart and graf2il makes it possible to program con
 8. Download the program to the PLC and test...
 
 
-#Limitations / usage of the JGrafchart-blocks:
+##Usage for TIA portal (e.g. S7-1200)
+1. Create a control graph in JGrafchart.
+2. Use the Compile-Button in JGrafchart to find any errors.
+3. Save the project as an .xml-file
+4. Invoke graf2il: python graf2il.py "your-control-sequence.xml" scl
+5. graf2il creates the file "your-control-sequence.scl"
+6. Start TIA portal, create a new project.
+7. Go to "External Source Files" and add the created "your-control-sequence.scl"
+8. Right click on "your-control-sequence.scl" and select "Generate blocks from source".
+9. Drag the newly created block into your program and connect the inputs and outputs.
+10. Download the program to the PLC and test...
+
+
+##Limitations / usage of the JGrafchart-blocks
 graf2il does not support the whole Grafchart-language. From JGrafchart only the following blocks are supported:
 - digital input
 - digital input (inverse logic)
@@ -43,13 +58,13 @@ Transitions:
 - If a condition had to be checked for FALSE, use a digital input (inverse logic) to invert the condition.
 
 
-#Tested with:
+##Tested with
 - JGrafchart 2.6.1
 - Python 2.7.6
 - V4.0 Step7 MicroWIN SP7
 - PLC: S7-200 CPU 224 and CPU 222
 
-#Copyright
+##Copyright
     
 Copyright 2015 Fritz Schimpf
 
