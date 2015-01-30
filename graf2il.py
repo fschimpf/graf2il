@@ -23,13 +23,13 @@ from generateSCL import generateSCL
 def main():
     filename = sys.argv[1]      # get filename for xml-file from command line
     outputType = sys.argv[2]    # get type of desired output from command line. Valid: "awl" for S7-200 and "scl" for S7-1200
-    print
-    print 'graf2il - converts a JGrafchart xml-file to Siemens Step 7 awl-file'
-    print 'Fritz Schimpf, version 0.3'
-    print
-    print 'opening file: ', filename
-    print 'output-type: ', outputType
-    print
+    print 
+    print ('graf2il - converts a JGrafchart xml-file to Siemens Step 7 awl-file')
+    print ('Fritz Schimpf, version 0.4')
+    print 
+    print ('opening file: ', filename)
+    print ('output-type: ', outputType)
+    print 
 
 
     # parse XML with ElementTree
@@ -60,11 +60,11 @@ def main():
         name = dout.get('name')
         digOutDict[name] = channel
 
-    print 'found in- and outputs:'
+    print ('found in- and outputs:')
     for i in sorted(digInDict):
-        print digInDict[i].ljust(5), i
+        print (digInDict[i].ljust(5), i)
     for i in sorted(digOutDict):
-        print digOutDict[i].ljust(5), i
+        print (digOutDict[i].ljust(5), i)
     print
 
 
@@ -72,14 +72,15 @@ def main():
 
     def mem(n):
         "Generate memory-bit-notation (e.g. M0.0) from number of memory-bit (Mx.y)"
-        mBit = (n / 8, n % 8)
+        mBit = (n // 8, n % 8)
+        print ('Generated mBit {0}, {1}'.format(n, mBit))
         memstring = 'M{0[0]}.{0[1]}'.format(mBit)
         return memstring
 
     nextM = 0           # counter for next unused Memory-Bit
     nextStep = 0        # Step-counter  
 
-    print 'found step(s):'
+    print ('found step(s):')
     stepList = []                                 # create empty list for storing transition data
 
     for initialStep in root.findall('GCInitialStep'):
@@ -110,7 +111,7 @@ def main():
 
     for thisStep in stepList:
         n, name, action, eid, memory = thisStep    
-        print str(n).ljust(3), memory.ljust(5), name
+        print (str(n).ljust(3), memory.ljust(5), name)
     print
 
 
@@ -124,12 +125,12 @@ def main():
                 returnStep = step                       # found, return current step and
                 break                                   # exit for-loop
         if returnStep == []:
-            raise NameError, 'Step-id not found in stepList' 
+            raise (NameError, 'Step-id not found in stepList') 
         return (returnStep)
 
 
     # Parse Transitions from XML and store them in transitionList
-    print 'found transitions:'
+    print ('found transitions:')
     nTransition = 0                                     # counter for Transitions
     transitionList = []                                 # create empty list for storing transition data
     for transition in root.findall('GCTransition'):
@@ -172,27 +173,27 @@ def main():
     # Print transition list
     for thisTransition in transitionList:
         nTransition, name, eid, fromStepn, fromStepMem, toStepn, condition, memory = thisTransition
-        print str(nTransition).ljust(3), memory.ljust(5), name
+        print (str(nTransition).ljust(3), memory.ljust(5), name)
 
-    print '... parsing XML done'
+    print ('... parsing XML done')
 
     print
-    print 'Created memory list:'
+    print ('Created memory list:')
     for step in stepList:
-        print step[4].ljust(5), step[1]
+        print (step[4].ljust(5), step[1])
     for transition in transitionList:
-        print transition[7].ljust(5), transition[1]
+        print (transition[7].ljust(5), transition[1])
 
     print
 
     if outputType == 'awl':
-        print 'Generating .awl'
+        print ('Generating .awl')
         generateAWL(filename, stepList, transitionList, digInDict, digOutDict)
     elif outputType == 'scl':
-        print 'Generating .scl'
+        print ('Generating .scl')
         generateSCL(filename, stepList, transitionList, digInDict, digOutDict)
     else:
-        print 'No valid output type selected. No output file created. Valid types are: awl, scl'
+        print ('No valid output type selected. No output file created. Valid types are: awl, scl')
 
 
 if __name__ == '__main__':  
