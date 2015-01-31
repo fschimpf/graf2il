@@ -158,7 +158,7 @@ def generateSCL(filename, stepList, transitionList, digInDict, digOutDict):
         output = separated[0].strip()
         setReset = separated[2].strip()
         separated = output.partition(' ')
-        if separated[0] == 'S':
+        if (separated[0] == 'S') or (separated[0] == 's'):
             output = separated[2].strip()
             outputChannel = outDict[output]
             if outputChannel[0] == '/':         # channel has to be inverted

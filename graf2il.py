@@ -23,13 +23,13 @@ from generateSCL import generateSCL
 def main():
     filename = sys.argv[1]      # get filename for xml-file from command line
     outputType = sys.argv[2]    # get type of desired output from command line. Valid: "awl" for S7-200 and "scl" for S7-1200
-    print 
+    print ()
     print ('graf2il - converts a JGrafchart xml-file to Siemens Step 7 awl-file')
     print ('Fritz Schimpf, version 0.4')
-    print 
+    print ()
     print ('opening file: ', filename)
     print ('output-type: ', outputType)
-    print 
+    print ()
 
 
     # parse XML with ElementTree
@@ -65,7 +65,7 @@ def main():
         print (digInDict[i].ljust(5), i)
     for i in sorted(digOutDict):
         print (digOutDict[i].ljust(5), i)
-    print
+    print ()
 
 
     # Parse steps from XML and store them in stepList
@@ -73,7 +73,7 @@ def main():
     def mem(n):
         "Generate memory-bit-notation (e.g. M0.0) from number of memory-bit (Mx.y)"
         mBit = (n // 8, n % 8)
-        print ('Generated mBit {0}, {1}'.format(n, mBit))
+        #print ('Generated mBit {0}, {1}'.format(n, mBit))
         memstring = 'M{0[0]}.{0[1]}'.format(mBit)
         return memstring
 
@@ -112,7 +112,7 @@ def main():
     for thisStep in stepList:
         n, name, action, eid, memory = thisStep    
         print (str(n).ljust(3), memory.ljust(5), name)
-    print
+    print()
 
 
     def findStepEid(eid, sList):
@@ -177,14 +177,14 @@ def main():
 
     print ('... parsing XML done')
 
-    print
+    print()
     print ('Created memory list:')
     for step in stepList:
         print (step[4].ljust(5), step[1])
     for transition in transitionList:
         print (transition[7].ljust(5), transition[1])
 
-    print
+    print()
 
     if outputType == 'awl':
         print ('Generating .awl')

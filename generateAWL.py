@@ -122,7 +122,7 @@ def generateAWL(filename, stepList, transitionList, digInDict, digOutDict):
         output = separated[0].strip()
         setReset = separated[2].strip()
         separated = output.partition(' ')
-        if separated[0] == 'S':
+        if (separated[0] == 'S') or (separated[0] == 's'):
             output = separated[2].strip()
             outputChannel = outDict[output]
             if outputChannel[0] == '/':         # channel has to be inverted
@@ -139,12 +139,12 @@ def generateAWL(filename, stepList, transitionList, digInDict, digOutDict):
                     outputfile.write ('R       {0}, 1\n'.format(outputChannel))   #reset output
                 else:
                     outputfile.write ('S       {0}, 1\n'.format(outputChannel))   #set output  
-            else:
-                raise (NameError, 'unsupported output value')
+            else:               
+                raise NameError('unsupported output value')
         else:
             print ('Error: unsupported output action: ', actionstring)
             print
-            raise (NameError, 'unsupported output action')
+            raise NameError('unsupported output action')
         if remainder != '':
             parse_actions (remainder, outputfile, outDict)
 

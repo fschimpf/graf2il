@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<GCDocument color="-1" dimTicks="25" dpwsInterface="" dpwsPort="-1" height="1090" horizontalScrollBar="1" modifiable="1" name="J1" saveVersion="8" scale="0.81" simulationMode="1" socketHost="" socketIsServer="0" socketPort="-1" socketSendMode="Changed" threadSpeed="40" tokenLuminance="0" verticalScrollBar="1" viewPositionX="0" viewPositionY="5" width="1710" x="0" y="0">
+<GCDocument color="-1" dimTicks="25" dpwsInterface="" dpwsPort="-1" height="658" horizontalScrollBar="1" modifiable="1" name="J1" saveVersion="8" scale="0.81" simulationMode="1" socketHost="" socketIsServer="0" socketPort="-1" socketSendMode="Changed" threadSpeed="40" tokenLuminance="0" verticalScrollBar="1" viewPositionX="0" viewPositionY="360" width="1156" x="0" y="0">
   <GCInitialStep actionBlockVisible="1" actionText="S ventil_vakuum = 0;&#10;S ventil_syl1_ned = 0;&#10;S ventil_syl1_opp = 1;&#10;S rele_motor_start = 0;" fileName="" height="70" id="49cf3810-9325-4d19-886c-c608fa1ab2eb" name="start_i_ukjent_posisjon" useIcon="0" width="200" x="220" y="75"/>
   <DigitalIn channel="0" cyclic="1" height="60" name="S_syl1_opp" value="0" width="80" x="1980" y="30"/>
   <DigitalIn channel="0" cyclic="1" height="60" name="S_syl1_ned" value="0" width="80" x="1980" y="150"/>
@@ -39,7 +39,7 @@
   <GCTransition actionText="S_syl2_venstre" conditionVisible="1" height="25" id="7307674c-8c78-40ae-b38c-210e07521d96" width="30" x="665" y="560"/>
   <GCStep actionBlockVisible="1" actionText="S ventil_syl1_opp = 0;&#10;S ventil_syl1_ned = 1;" fileName="" height="70" id="e028bc06-2824-4421-b967-12bd658e9893" name="til_testplass_ned" useIcon="0" width="200" x="650" y="595"/>
   <GCTransition actionText="S_syl1_ned" conditionVisible="1" height="25" id="5dfc81c8-5e25-4dd5-8cf2-6caa6de7fae6" width="30" x="665" y="680"/>
-  <GCStep actionBlockVisible="1" actionText=";" fileName="" height="70" id="eac39331-6ef1-4e21-ae29-1d5e3803e29d" name="test_metall_plast" useIcon="0" width="200" x="650" y="725"/>
+  <GCStep actionBlockVisible="1" actionText=";" fileName="" height="70" id="eac39331-6ef1-4e21-ae29-1d5e3803e29d" name="test_metall_plaståø" useIcon="0" width="200" x="650" y="725"/>
   <GCTransition actionText="kloss_er_plast" conditionVisible="1" height="25" id="d3290363-237f-401f-8cf0-e6cb4635159b" width="30" x="1085" y="110"/>
   <GCTransition actionText="kloss_er_metall" conditionVisible="1" height="25" id="eecfecf5-f4d0-41c3-bbd2-440acb92162b" width="30" x="1445" y="110"/>
   <DigitalIn1 channel="0" cyclic="1" height="60" name="kloss_er_plast" value="0" width="80" x="1714" y="270"/>
