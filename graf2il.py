@@ -20,9 +20,9 @@ import sys
 from generateAWL import generateAWL
 from generateSCL import generateSCL 
 
-def main():
-    filename = sys.argv[1]      # get filename for xml-file from command line
-    outputType = sys.argv[2]    # get type of desired output from command line. Valid: "awl" for S7-200 and "scl" for S7-1200
+def main(filename, outputType):
+    #filename = sys.argv[1]      # get filename for xml-file from command line
+    #outputType = sys.argv[2]    # get type of desired output from command line. Valid: "awl" for S7-200 and "scl" for S7-1200
     print ()
     print ('graf2il - converts a JGrafchart xml-file to Siemens Step 7 awl-file')
     print ('Fritz Schimpf, version 0.4')
@@ -196,6 +196,9 @@ def main():
         print ('No valid output type selected. No output file created. Valid types are: awl, scl')
 
 
+# If script is called from the command line, read arguments from command line. If it is called as a function, main can be called directly. 
+# http://stackoverflow.com/questions/3781851/run-a-python-script-from-another-python-script-passing-in-args
+# https://docs.python.org/2/tutorial/modules.html?highlight=import
 if __name__ == '__main__':  
-    main()
+    main(sys.argv[1], sys.argv[2])
 
