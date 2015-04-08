@@ -20,12 +20,17 @@ class MeinProgramm(QtGui.QMainWindow, Ui_MainWindow):
 
     def start_graf2il(self):
         self.statusBar().showMessage('Script graf2il aktiv')
-        graf2il.main(self.XMLFileToCompileName,'awl')
+        
+        # start graf2il with correct setting for target language        
+        if  self.comboBox.currentIndex() == 0:      
+            graf2il.main(self.XMLFileToCompileName,'awl')
+        elif self.comboBox.currentIndex() == 1:
+            graf2il.main(self.XMLFileToCompileName,'scl')
+
         self.statusBar().showMessage('Malvik VGS - Fritz Schimpf')
 
     def chooseInFile(self):
         self.statusBar().showMessage('Velg inputfil')
-        #self.XMLFileToCompileName = str(QtGui.QFileDialog.getOpenFileName(self, 'Velg fil som skal bli oversatt', '', selectedFilter='*.xml'))
         self.XMLFileToCompileName = str(QtGui.QFileDialog.getOpenFileName(self, 'Velg fil som skal bli oversatt', '', 'JGrafchart XML-filer (*.xml);;alle filer (*.*)'))
         self.lineEdit.setText(self.XMLFileToCompileName)
         self.statusBar().showMessage('Malvik VGS - Fritz Schimpf')
