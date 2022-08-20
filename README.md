@@ -1,4 +1,4 @@
-#graf2il
+# graf2il
 
 graf2il is a python script for translating a .xml-file created with JGrafchart (http://www.control.lth.se/grafchart/) to an instruction list (.awl)-file. The .awl-file can be imported into Siemens' Step7.
 
@@ -7,7 +7,7 @@ The toolchain consisting JGrafchart and graf2il makes it possible to program con
 Update: SCL is supported as second target language. This makes it possible to generate source files which can be imported into TIA portal. The sequence can then be integrated into the project as a function block.
 
 
-##Usage for S7-200
+## Usage for S7-200
 1. Create a control graph in JGrafchart.
 2. Use the Compile-Button in JGrafchart to find any errors.
 3. Save the project as an .xml-file
@@ -18,7 +18,7 @@ Update: SCL is supported as second target language. This makes it possible to ge
 8. Download the program to the PLC and test...
 
 
-##Usage for TIA portal (e.g. S7-1200)
+## Usage for TIA portal (e.g. S7-1200)
 1. Create a control graph in JGrafchart.
 2. Use the Compile-Button in JGrafchart to find any errors.
 3. Save the project as an .xml-file
@@ -31,7 +31,7 @@ Update: SCL is supported as second target language. This makes it possible to ge
 10. Download the program to the PLC and test...
 
 
-##Limitations / usage of the JGrafchart-blocks
+## Limitations / usage of the JGrafchart-blocks
 graf2il does not support the whole Grafchart-language. From JGrafchart only the following blocks are supported:
 - digital input
 - digital input (inverse logic)
@@ -58,13 +58,13 @@ Transitions:
 - If a condition had to be checked for FALSE, use a digital input (inverse logic) to invert the condition.
 
 
-##Tested with
+## Tested with
 - JGrafchart 2.6.1
 - Python 2.7.6
 - V4.0 Step7 MicroWIN SP7
 - PLC: S7-200 CPU 224 and CPU 222
 
-##Copyright
+## Copyright
     
 Copyright 2015 Fritz Schimpf
 
